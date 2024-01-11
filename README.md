@@ -61,7 +61,7 @@ Both services are designed to run in isolated environments and are exposed throu
 3. **ArgoCD**: Monitors and triggers deployment based on Helm chart changes.
 
 The following diagram illustrates the development and deployment process for our services:
-![Deployment Process](./deployment-process.svg)
+![Deployment Process](./workflow.svg)
 
 ## GitHub Actions Pipelines
 
