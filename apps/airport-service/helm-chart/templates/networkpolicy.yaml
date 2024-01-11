@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: airport-service-policy
+  namespace: airport-service
+spec:
+  podSelector:
+    matchLabels:
+      app: airport-service
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+      - namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: nginx-ingress
+        podSelector:
+          matchLabels:
+            app.kubernetes.io/name: ingress-nginx

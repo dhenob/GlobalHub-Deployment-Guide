@@ -1,0 +1,86 @@
+name: airport-service
+replicaCount: 1
+
+image:
+  repository: dhenob/viwell-airport-service
+  pullPolicy: IfNotPresent
+  tag: 1.0.1
+
+podSecurityContext:
+  fsGroup: 1000
+  runAsUser: 1000
+  runAsGroup: 1000
+
+containerSecurityContext:
+  capabilities:
+    drop:
+      - ALL
+    add: ["NET_ADMIN"]
+  readOnlyRootFilesystem: false
+  runAsNonRoot: true
+  allowPrivilegeEscalation: false
+
+service:
+  type: ClusterIP
+  port: 8000
+  targetPort: 8080
+
+resources:
+  requests:
+    cpu: 2000m
+    memory: 2Gi
+  limits:
+    cpu: 3000m
+    memory: 3Gi
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+  metrics:
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 80
+
+
+livenessProbe:
+  initialDelaySeconds: 15
+  periodSeconds: 5
+  timeoutSeconds: 10
+  successThreshold: 1
+  failureThreshold: 5
+
+
+readinessProbe:
+  initialDelaySeconds: 30
+  periodSeconds: 15
+  timeoutSeconds: 10
+  successThreshold: 1
+  failureThreshold: 5
+ 
+
+namespace: "airport-service"
+
+ingress:
+  enabled: true
+  hosts:
+    - host: airport-service.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: airport-service
+              port:
+                number: 8000
+  tls: []
