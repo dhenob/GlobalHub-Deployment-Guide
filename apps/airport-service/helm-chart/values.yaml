@@ -28,10 +28,10 @@ service:
 resources:
   requests:
     cpu: 2000m
-    memory: 2Gi
+    memory: 1Gi
   limits:
     cpu: 3000m
-    memory: 3Gi
+    memory: 2Gi
 
 autoscaling:
   enabled: true
