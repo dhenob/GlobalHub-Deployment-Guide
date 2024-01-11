@@ -39,6 +39,13 @@ spec:
             - containerPort: {{ .Values.service.targetPort }}
               protocol: TCP
           {{- if .Values.livenessProbe }}
+          startupProbe:
+            httpGet:
+              path: /health/live
+              port: 8080
+            initialDelaySeconds: {{ .Values.startupProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.startupProbe.periodSeconds }}
+            failureThreshold: {{ .Values.startupProbe.failureThreshold }}
           livenessProbe:
             httpGet:
               path: /health/live
