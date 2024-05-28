@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/dhenob/VIwell-Assessment.git'
+    repoURL: 'https://github.com/dhenob/GlobalHub-Deployment-Guide.git'
     path: argocd/apps
     targetRevision: HEAD
   destination:

@@ -5,7 +5,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/dhenob/VIwell-Assessment.git'
+    repoURL: 'https://github.com/dhenob/GlobalHub-Deployment-Guide.git'
     path: apps/country-service/helm-chart
     targetRevision: HEAD
     helm:
