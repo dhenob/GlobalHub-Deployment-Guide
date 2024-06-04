@@ -4,7 +4,7 @@ replicaCount: 1
 image:
   repository: dhenob/viwell-country-service
   pullPolicy: IfNotPresent
-  tag: 1.0.1
+  tag: 1.0.10
 
 podSecurityContext:
   fsGroup: 1000
